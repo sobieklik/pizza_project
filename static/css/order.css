@@ -1,0 +1,106 @@
+#cart{
+    padding: 0px 60px 0px 60px;
+    display: inline-flex;
+    flex-direction: column;
+
+}
+h3 {
+    margin-top: 5px;
+}
+.cart_product_info{
+    width: 100%;
+    
+}
+.cart_description{
+    width: 100%;
+}
+.order_content{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.order_product{
+    margin-bottom: 15px;
+}
+
+.order_additives{
+    padding-left: 10px;
+    display:flex;
+    flex-direction: column;
+}
+.order_additives i {
+    text-align: left;
+  
+}
+.order_list_additives{
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+.order_list_additives span {
+    text-align: left;
+   
+}
+.order_sauce{
+    display: block;
+    text-align: left;
+    margin: 7px;
+    
+
+}
+.order_sauce > i{
+    font-family: Lobster;
+}
+.order_list_additives{
+    display: flex;
+    flex-wrap: wrap;
+}
+.order_total_price{
+    width: 100%;
+    margin: 15px 0px 30px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.order_total_price i {
+    text-align: center;
+    width: 25%;
+    font-weight: bold;
+}
+
+.order_total_price i:first-child{
+    text-align: left;
+    width: 75%;
+    text-transform: uppercase;
+
+}
+.post-form > p {
+    display: flex;
+    flex-direction: column;
+
+}
+.order_form{
+    text-align: left;
+
+}
+.post-form > p > input {
+
+    font-family: Cursive;
+    background-color: white;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+.g-recaptcha{
+    align-items: center;
+    margin: 10px 0px 10px 0px;
+}
+/* -------------------- PHONE SCREEN ---------------- */
+
+@media screen and (max-width: 700px){
+
+    #cart{
+        padding: 0px;
+    }
+
+
+} 

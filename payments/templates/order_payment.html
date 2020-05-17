@@ -1,0 +1,12 @@
+<!-- --------------------- FILE LOADED IN MODAL ------------------------ -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/order_created.css' %}" />
+<div class="cart">
+    <h3>Numer zamówienia {{ order_id }}</h3>
+        <h4> Zapłać teraz </h4>
+        {{ form.render }}      
+
+    <div class="modal-footer">
+        <button id="modal_btn" type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+    </div> 
+</div>

@@ -1,0 +1,131 @@
+<!-- --------------------- FILE LOADED IN MODAL ------------------------ -->
+{% load static %}
+{% load tags %}
+
+<link rel="stylesheet" href="{% static 'css/cart.css' %}" />
+<script type="text/javascript" src="{% static 'js/cart.js' %}"></script> 
+
+<div id="cart">
+    {% if cart|length > 0 %}
+        <div class="cart_info">
+            <h4>Produkty w koszyku: {{ cart|length }}</h4>
+            <h4>Do zapłaty: {{ cart.get_total_price }} zł</h4> 
+        </div>
+        <div class="cart_product_info">
+            <i>Nazwa</i>
+            <i>Porcja</i>
+            <i>Ilość</i>
+            <i>Cena</i>
+        </div>
+                   
+        {% for item in cart %}
+            <div class="cart_content">
+                <div class="cart_btn_desc">
+                    <span class="cart_description">
+                        <i> {{ item.name }} </i>
+                        <i> {{ item.size}} </i>
+                        <i> {{ item.quantity }}</i>
+                        <i> {{ item.total_price }} zł</i>
+                    </span>
+
+                    <span class="cart_button">
+                        <form  class="add" action='{% url "cart:add_item_to_cart"  item.product_id %}' method="POST">
+                            {% csrf_token %}
+                                <button type="submit" class="btn btn-link" > 
+                                    <span class="glyphicon glyphicon-plus-sign glyp"></span> 
+                                </button>
+                        </form>
+            
+                        <form  class="add" action='{% url "cart:subtract_item"  item.product_id %}' method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link" >
+                                <i class="glyphicon glyphicon-minus-sign glyp"></i>     
+                            </button>
+                        </form>   
+            
+                        <form  class="add" action='{% url "cart:remove_item"  item.product_id %}' method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link">
+                                <span class="glyphicon glyphicon-remove-sign glyp"></span>     
+                            </button>
+                        </form>
+                    </span>
+                </div>
+                            
+                {% for food in item.quantity|range %}
+                    <div class="cart_chips_and_meat">
+                                
+                        {% if item.type == "food_chips" or item.type == "food_chips_meat" %}
+                                       
+                            <form  name="{{ item.product_id }}" class="form_chips">
+                                {{ form_chips.chips }}
+                            </form>  
+                                          
+                        {% endif %}
+
+                        {% if item.type == "food_meat" or item.type == "food_chips_meat" %}
+                                      
+                            <form  name="{{ item.product_id }}" class="form_meat">
+                                {{ form_meat.meat }}
+                            </form>    
+                                      
+                        {% endif %}
+                                
+                    </div>
+                {% endfor %}
+                            
+                {% multiply item.sauce item.quantity as items_sauce %}   
+
+                {% for sauce in item.all_sauce|range %}
+                    <div class="cart_sauce">
+                        <form class="form_sauce" name="{{ item.product_id }}" >           
+                            {{ form_sauce.sauce }} 
+                        </form> 
+                                
+                        {% if forloop.counter > items_sauce %}
+                                    
+                            <form class="add" action='{% url "cart:delete_sauce" item.product_id %}' method="POST">
+                                {% csrf_token %}
+                
+                                <button type="submit" class="btn btn-link" >
+                                    <span class="glyphicon glyphicon-remove-sign glyp"></span>     
+                                </button>
+                            </form> 
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <div class="cart_add_sauce">
+                    <form class="add" action='{% url "cart:add_sauce" item.product_id %}' method="POST">
+                        {% csrf_token %}
+                            <button type="submit" class="hide_button">Dodaj sos</button>
+                    </form>    
+                </div>
+            </div>
+        {% endfor %}
+                        
+        <div class="modal-footer">
+                            
+            <button id="order" class="btn btn-default" data-href="{% url 'cart:cart' %}" type="submit">
+                {% csrf_token %} 
+                Złóż zamówienie
+            </button>     
+        </div>
+
+    {% else %}
+
+        <div style="margin: 20px 0px 20px 0px">
+            <h4>Trochę tutaj pusto...</h4>
+            <h4>Spróbuj czegoś z naszej kuchni</h4>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Kontynuuj zakupy</button>
+        </div>
+    {% endif %}
+</div>    
+   
+  
+        
+            
+            

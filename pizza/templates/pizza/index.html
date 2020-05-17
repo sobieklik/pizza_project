@@ -1,0 +1,615 @@
+{% extends "pizza/home.html" %}
+{% block product %}
+            <div class="container">
+              
+                <!-- -------------------------     PIZZA  ---------------------------------- -->
+  
+              <a href="#pizza" class="rows" data-toggle="collapse">
+                <div class="row">
+                  <div class="photo_section">
+                    <div class="image image_pizza "></div>
+                  </div>
+
+                  <div class="text_section">
+                    <p>Pizza</p>
+                  </div>  
+                </div>
+              </a>
+  
+              {% if pizza_list %}
+             
+              <div class="row">
+                <div class="item_list collapse" id="pizza">
+  
+                  <div class="pizza_info">
+                    <div class="pizza_icon pizza_icon_pizza"> </div>
+                    
+                  
+                    <div class="pizza_text">
+                  
+                      <p4 class="indicator">Gigant <br>  &#8960; 60cm</p4>
+                      <p3 class="indicator">Mega <br>  &#8960; 50cm</p3>
+                      <p2 class="indicator">Duża <br>  &#8960; 40cm</p2>
+                      <p1 class="indicator">Mała <br>  &#8960; 30cm</p1>
+
+                    </div>
+                  </div>
+  
+                  <div class="separator"></div>
+
+                    {% for food in pizza_list %}
+                    <div class="content">
+                      
+                      <div class="name">
+                        <p>{{ food.number }}.&nbsp;{{ food.name }} </p>
+                      </div>
+
+                      <div class="description">
+                        <i>
+                          {{ food.description }} 
+                        </i>
+                      </div>
+                      <div class="border"></div>
+                      <div class="portion">Porcja:</div>
+                      <div class="price">
+                        {% for product in food.pizza_product.all %}
+ 
+                        <div class="column column_pizza"> 
+                          <span>{{ product.get_size_display }}</span>
+                          <span>{{ product.price }} zł</span>
+                          <form class="add_to_cart" action='{% url "cart:add_item" product.uuid.id %}' method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-light btn_add_cart" ><i class="fa fa-cart-plus" aria-hidden="true"></i> </button>
+                          </form>
+                        </div>
+
+                        {% endfor %}
+                   
+                      </div>
+                      
+                    </div>   
+                    <div class="separator"></div>                 
+                    {% endfor %} 
+                </div>
+              </div>
+              {% endif %}
+  
+          <!--    -------------------------------       KEBAB    -------------------------------     -->
+              
+  
+          <a href="#kebab" class="rows" data-toggle="collapse">
+            <div class="row"> 
+              <div class="photo_section">
+                <span class="image image_kebab "></span>
+              </div>
+
+              <div class="text_section">
+                <p>Kebab</p>
+              </div>  
+            </div>
+          </a>
+  
+          {% if kebab_list %}
+         
+          <div class="row">
+            <div class="item_list collapse" id="kebab">
+              <div class="separator"></div>
+
+                {% for food in kebab_list %}
+                <div class="content">
+                  <div class="name nm">
+                    <p>{{ food.name }}</p>
+                  </div>
+  
+                  <div class="description">
+                    <i>
+                      {{ food.description }} 
+                    </i>
+                  </div>
+
+                  <div class="border"></div>
+                  <div class="portion">Porcja:</div>
+                  <div class="price">
+                    {% for product in food.food_product.all %}
+
+                      <div class="column"> 
+                        <div>
+                          <span>{{ product.get_size_display }}</span>
+                          <span>{{ product.price }} zł</span>
+                        </div>
+
+                        <form class="add_to_cart add_food" action='{% url "cart:add_item" product.uuid.id %}' method="POST">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-light btn_add_cart" ><i class="fa fa-cart-plus" aria-hidden="true"></i> </button> 
+                        </form>   
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="separator"></div>
+                
+                {% endfor %}
+
+              </div>
+            </div>
+          {% endif %}
+
+
+           <!--    -------------------------------       FASTFOOD    -------------------------------     -->
+              
+  
+           <a href="#fastfood" class="rows" data-toggle="collapse">
+            <div class="row rev"> 
+              <div class="photo_section">
+                <span class="image image_fastfood "></span>
+              </div>
+
+              <div class="text_section">
+                <p>Fastfood</p>
+              </div>  
+            </div>
+          </a>
+  
+          {% if fastfood_list %}
+          
+          <div class="row">
+            <div class="item_list collapse" id="fastfood">
+              <div class="separator"></div>
+
+                {% for food in fastfood_list %}
+                <div class="content">
+                  <div class="name nm">
+                    <p>{{ food.name }}</p>
+                  </div>
+  
+                  <div class="description">
+                    <i>
+                      {{ food.description }} 
+                    </i>
+                  </div>
+
+                  <div class="border"></div>
+                  <div class="portion">Porcja:</div>
+                  <div class="price">
+                    {% for product in food.food_product.all %}
+
+                      <div class="column"> 
+                        <div>
+                          <span>{{ product.get_size_display }}</span>
+                          <span>{{ product.price }} zł</span>
+                        </div>
+
+                        <form class="add_to_cart" action='{% url "cart:add_item" product.uuid.id %}' method="POST">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-light btn_add_cart" ><i class="fa fa-cart-plus" aria-hidden="true"></i> </button> 
+                        </form>   
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="separator"></div>
+
+                {% endfor %}
+
+              </div>
+            </div>
+          {% endif %}
+              <!--    -------------------------------       CASSEROLE   -------------------------------     -->
+              
+  
+          <a href="#casserole" class="rows" data-toggle="collapse">
+            <div class="row rev"> 
+              <div class="photo_section">
+                <span class="image image_casserole "></span>
+              </div>
+
+              <div class="text_section">
+                <p>Zapiekanki</p>
+              </div>  
+            </div>
+          </a>
+  
+          {% if casserole_list %}
+         
+          <div class="row">
+            <div class="item_list collapse" id="casserole">
+              <div class="separator"></div>
+
+                {% for food in casserole_list %}
+                <div class="content">
+                  <div class="name nm">
+                    <p>{{ food.name }}</p>
+                  </div>
+  
+                  <div class="description">
+                    <i>
+                      {{ food.description }} 
+                    </i>
+                  </div>
+
+                  <div class="border"></div>
+                  <div class="portion">Porcja:</div>
+                  <div class="price">
+                    {% for product in food.food_product.all %}
+
+                      <div class="column"> 
+                        <div>
+                          <span>{{ product.get_size_display }}</span>
+                          <span>{{ product.price }} zł</span>
+                        </div>
+
+                        <form class="add_to_cart" action='{% url "cart:add_item" product.uuid.id %}' method="POST">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-light btn_add_cart" ><i class="fa fa-cart-plus" aria-hidden="true"></i> </button> 
+                        </form>   
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="separator"></div>
+
+                {% endfor %}
+
+              </div>
+            </div>
+          {% endif %}
+  
+               <!--    -------------------------------       PASTAS    -------------------------------     -->
+              
+  
+               <a href="#pasta" class="rows" data-toggle="collapse">
+                <div class="row"> 
+                  <div class="photo_section">
+                    <span class="image image_pasta"></span>
+                  </div>
+    
+                  <div class="text_section">
+                    <p>Makarony</p>
+                  </div>  
+                </div>
+              </a>
+      
+              {% if pasta_list %}
+             
+              <div class="row">
+                <div class="item_list collapse" id="pasta">
+                  <div class="separator"></div>
+    
+                    {% for food in pasta_list %}
+                    <div class="content">
+                      <div class="name nm">
+                        <p>{{ food.name }}</p>
+                      </div>
+      
+                      <div class="description">
+                        <i>
+                          {{ food.description }} 
+                        </i>
+                      </div>
+    
+                      <div class="border"></div>
+                      <div class="portion">Porcja:</div>
+                      <div class="price">
+                        {% for product in food.food_product.all %}
+    
+                          <div class="column"> 
+                            <div>
+                              <span>{{ product.get_size_display }}</span>
+                              <span>{{ product.price }} zł</span>
+                            </div>
+    
+                            <form class="add_to_cart" action='{% url "cart:add_item" product.uuid.id %}' method="POST">
+                              {% csrf_token %}
+                              <button type="submit" class="btn btn-light btn_add_cart" ><i class="fa fa-cart-plus" aria-hidden="true"></i> </button> 
+                            </form>   
+                          </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                      <div class="separator"></div>
+    
+                    {% endfor %}
+    
+                  </div>
+                </div>
+              {% endif %}
+                           
+                   <!--    -------------------------------       DINNERS   -------------------------------     -->
+              
+  
+                   <a href="#dinner" class="rows" data-toggle="collapse">
+                    <div class="row "> 
+                      <div class="photo_section">
+                        <span class="image image_dinner"></span>
+                      </div>
+        
+                      <div class="text_section">
+                        <p>Dania obiadowe</p>
+                      </div>  
+                    </div>
+                  </a>
+          
+                  {% if dinner_list %}
+                 
+                  <div class="row">
+                    <div class="item_list collapse" id="dinner">
+                      <div class="separator"></div>
+        
+                        {% for food in dinner_list %}
+                        <div class="content">
+                          <div class="name nm">
+                            <p>{{ food.name }}</p>
+                          </div>
+          
+                          <div class="description">
+                            <i>
+                              {{ food.description }} 
+                            </i>
+                          </div>
+        
+                          <div class="border"></div>
+                          <div class="portion">Porcja:</div>
+                          <div class="price">
+                            {% for product in food.food_product.all %}
+        
+                              <div class="column"> 
+                                <div>
+                                  <span>{{ product.get_size_display }}</span>
+                                  <span>{{ product.price }} zł</span>
+                                </div>
+        
+                                <form class="add_to_cart" action='{% url "cart:add_item" product.uuid.id %}' method="POST">
+                                  {% csrf_token %}
+                                  <button type="submit" class="btn btn-light btn_add_cart" ><i class="fa fa-cart-plus" aria-hidden="true"></i> </button> 
+                                </form>   
+                              </div>
+                            {% endfor %}
+                          </div>
+                        </div>  
+                        <div class="separator"></div>
+        
+                        {% endfor %}
+        
+                      </div>
+                    </div>
+                  {% endif %}
+                 <!--    -------------------------------       SOUPS    -------------------------------     -->
+              
+  
+                 <a href="#soup" class="rows" data-toggle="collapse">
+                  <div class="row rev"> 
+                    <div class="photo_section">
+                      <span class="image image_soup"></span>
+                    </div>
+      
+                    <div class="text_section">
+                      <p>Zupy</p>
+                    </div>  
+                  </div>
+                </a>
+        
+                {% if soup_list %}
+               
+                <div class="row">
+                  <div class="item_list collapse" id="soup">
+                    <div class="separator"></div>
+      
+                      {% for food in soup_list %}
+                      <div class="content">
+                        <div class="name nm">
+                          <p>{{ food.name }}</p>
+                        </div>
+        
+                        <div class="description">
+                          <i>
+                            {{ food.description }} 
+                          </i>
+                        </div>
+      
+                        <div class="border"></div>
+                        <div class="portion">Porcja:</div>
+                        <div class="price">
+                          {% for product in food.food_product.all %}
+      
+                            <div class="column"> 
+                              <div>
+                                <span>{{ product.get_size_display }}</span>
+                                <span>{{ product.price }} zł</span>
+                              </div>
+      
+                              <form class="add_to_cart" action='{% url "cart:add_item" product.uuid.id %}' method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-light btn_add_cart" ><i class="fa fa-cart-plus" aria-hidden="true"></i> </button> 
+                              </form>   
+                            </div>
+                          {% endfor %}
+                        </div>
+                      </div>
+                      <div class="separator"></div>
+      
+                      {% endfor %}
+      
+                    </div>
+                  </div>
+                {% endif %}
+                     <!--    -------------------------------       PANCAKES    -------------------------------     -->
+              
+  
+                     <a href="#pancake" class="rows" data-toggle="collapse">
+                      <div class="row rev"> 
+                        <div class="photo_section">
+                          <span class="image image_pancake"></span>
+                        </div>
+          
+                        <div class="text_section">
+                          <p>Naleśniki</p>
+                        </div>  
+                      </div>
+                    </a>
+            
+                    {% if pancake_list %}
+                   
+                    <div class="row">
+                      <div class="item_list collapse" id="pancake">
+                        <div class="separator"></div>
+          
+                          {% for food in pancake_list %}
+                          <div class="content">
+                            <div class="name nm">
+                              <p>{{ food.name }}</p>
+                            </div>
+            
+                            <div class="description">
+                              <i>
+                                {{ food.description }} 
+                              </i>
+                            </div>
+          
+                            <div class="border"></div>
+                            <div class="portion">Porcja:</div>
+                          
+                            <div class="price">
+                              {% for product in food.food_product.all %}
+          
+                                <div class="column"> 
+                                  <div>
+                                    <span>{{ product.get_size_display }}</span>
+                                    <span>{{ product.price }} zł</span>
+                                  </div>
+          
+                                  <form class="add_to_cart" action='{% url "cart:add_item" product.uuid.id %}' method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-light btn_add_cart" ><i class="fa fa-cart-plus" aria-hidden="true"></i> </button> 
+                                  </form>   
+                                </div>
+                              {% endfor %}
+                            </div>
+                          </div>
+                          <div class="separator"></div>
+          
+                          {% endfor %}
+          
+                        </div>
+                      </div>
+                    {% endif %}
+                     <!--    -------------------------------       SALADS    -------------------------------     -->
+              
+  
+                     <a href="#salad" class="rows" data-toggle="collapse">
+                      <div class="row"> 
+                        <div class="photo_section">
+                          <span class="image image_salad"></span>
+                        </div>
+          
+                        <div class="text_section">
+                          <p>Sałatki</p>
+                        </div>  
+                      </div>
+                    </a>
+            
+                    {% if salad_list %}
+                   
+                    <div class="row">
+                      <div class="item_list collapse" id="salad">
+                        <div class="separator"></div>
+          
+                          {% for food in salad_list %}
+                          <div class="content">
+                            <div class="name nm">
+                              <p>{{ food.name }}</p>
+                            </div>
+            
+                            <div class="description">
+                              <i>
+                                {{ food.description }} 
+                              </i>
+                            </div>
+          
+                            <div class="border"></div>
+                            <div class="portion">Porcja:</div>
+                            <div class="price">
+                              {% for product in food.food_product.all %}
+          
+                                <div class="column"> 
+                                  <div>
+                                    <span>{{ product.get_size_display }}</span>
+                                    <span>{{ product.price }} zł</span>
+                                  </div>
+          
+                                  <form class="add_to_cart" action='{% url "cart:add_item" product.uuid.id %}' method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-light btn_add_cart" ><i class="fa fa-cart-plus" aria-hidden="true"></i> </button> 
+                                  </form>   
+                                </div>
+                              {% endfor %}
+                            </div>
+                          </div>
+                          <div class="separator"></div>
+          
+                          {% endfor %}
+          
+                        </div>
+                      </div>
+                    {% endif %}
+                     <!--    -------------------------------       SNACKS    -------------------------------     -->
+              
+  
+                     <a href="#snack" class="rows" data-toggle="collapse">
+                      <div class="row"> 
+                        <div class="photo_section">
+                          <span class="image image_snack"></span>
+                        </div>
+          
+                        <div class="text_section">
+                          <p>Przekąski</p>
+                        </div>  
+                      </div>
+                    </a>
+            
+                    {% if snack_list %}
+                   
+                    <div class="row">
+                      <div class="item_list collapse" id="snack">
+                        <div class="separator"></div>
+          
+                          {% for food in snack_list %}
+                          <div class="content">
+                            <div class="name nm">
+                              <p>{{ food.name }}</p>
+                            </div>
+            
+                            <div class="description">
+                              <i>
+                                {{ food.description }} 
+                              </i>
+                            </div>
+          
+                            <div class="border"></div>
+                            <div class="portion">Porcja:</div>
+                            <div class="price">
+                              {% for product in food.food_product.all %}
+          
+                                <div class="column"> 
+                                  <div>
+                                    <span>{{ product.get_size_display }}</span>
+                                    <span>{{ product.price }} zł</span>
+                                  </div>
+          
+                                  <form class="add_to_cart" action='{% url "cart:add_item" product.uuid.id %}' method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-light btn_add_cart" ><i class="fa fa-cart-plus" aria-hidden="true"></i> </button> 
+                                  </form>   
+                                </div>
+                              {% endfor %}
+                            </div>
+                          </div>
+                          <div class="separator"></div>
+          
+                          {% endfor %}
+          
+                        </div>
+                      </div>
+                    {% endif %}
+             </div>
+
+{% endblock %}

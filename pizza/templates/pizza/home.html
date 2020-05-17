@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Pizzeria XYZ</title>
+
+        {% load static %}
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+       
+        <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+        <script type="text/javascript" src="{% static 'js/home.js' %}"></script> 
+
+        {% if payment is True %}
+          <input type="hidden" data-href="{% url 'payments:payment_done' %}" class="check_payment"></input>
+        {% elif payment is False %} 
+          <input type="hidden" data-href="{% url 'payments:payment_cancelled'%}" class="check_payment"></input>
+        {% endif %}
+        
+    </head>              
+    <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+      <nav class="navbar navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            
+            <span class="navbar-brand"><a href="#myPage" ></a></span>
+
+            <span id="icons"> 
+              <span class="nav-icon">
+                <a type="button" href="tel:+48 999 999 999" class="glyphicon glyphicon-earphone" aria-hidden="true" ></a>  
+              </span>  
+
+              <span class="nav-icon">
+                <a type="button" href="tel:+48 999 999 999" class="glyphicon glyphicon-phone" aria-hidden="true" ></a> 
+              </span>
+
+              <span class="nav-icon">
+                <a id="cart_button" type="button" data-href='{% url "cart:cart" %}' method="GET"  aria-hidden="true">
+                  <span class="glyphicon glyphicon-shopping-cart"></span>
+                  <span class="badge"></span>
+                </a>
+              </span>
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#about">O nas</a></li>
+              <li><a href="#menu">Menu</a></li>
+              <li><a href="#contact">Kontakt</a></li>
+              <li><a href="#pricing">Promocje</a></li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav> 
+      
+      <div class="modal fade" id="myModal" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="container" style="padding: 0px; margin-top: 50px;" >
+
+          <div class="modal-content" style="color: black; text-align: center; padding: 0px; margin: 0px; width:100%;">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Twój koszyk</h4>
+            </div>
+            <div class="modal-body" >
+              <p>Błąd serwera. Spróbuj później</p>
+            </div>  
+          </div> 
+        </div>
+      </div>
+
+         
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+               
+                <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+                <li data-target="#myCarousel" data-slide-to="3"></li>
+                <li data-target="#myCarousel" data-slide-to="4"></li>
+                <li data-target="#myCarousel" data-slide-to="5"></li>
+                </ol>
+      
+                <div class="carousel-inner">
+                    <div class="item active">
+                      <div class="image_carousel one"></div>
+                    </div>
+
+                    <div class="item">
+                      <div class="item">
+                        <div class="image_carousel two"></div>
+                      </div>
+                    </div>
+
+                    <div class="item">
+                      <div class="image_carousel three"></div>
+                    </div>
+
+                    <div class="item">
+                      <div class="image_carousel four"></div>
+                    </div>
+
+                    <div class="item">
+                      <div class="image_carousel five"></div>
+                    </div>
+                    
+                </div>
+        <div class="bottom-left"> <p>Godziny otwarcia: </p>
+          <p>niedziela - czwartek: 12:00 - 22:00</p>
+          <p>piątek - sobota: 12:00 - 24:00</p>
+        </div>
+             
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>    
+        
+      <div class="container-fluid" >
+        <div class="content content_about" id="about">
+          <h1>Coś o nas</h1>
+            <div> {% lorem %} </div>
+        </div>
+      <div id="menu">
+        <p>Menu</p>
+      </div>
+      </div>
+        {% block product %}
+        {% endblock %} 
+
+      <div class="container-fluid" >
+        <div class="content" id="contact">
+          <h1>Gdzie nas znajdziesz</h1>
+            <div> {% lorem %} </div>
+          </div>
+      </div>
+
+    </body>
+      <footer>        
+        <div class="container-fluid social">
+          <form>
+            <button class="btn btn_instagram btn_social" formaction="https://www.instagram.com/">
+              <i class="fa fa-instagram" aria-hidden="true"></i></button>
+          </form>
+          <form>
+            <button  class="btn btn_facebook btn_social" formaction="https://www.facebook.com/">
+              <i class="fa fa-facebook-square" aria-hidden="true"></i></button>
+          </form>
+          <form>
+            <button class="btn btn_twitter btn_social" formaction="https://twitter.com/explore">
+              <i class="fa fa-twitter-square" aria-hidden="true"></i></button>
+          </form>
+        </div>
+      </footer>
+
+</html>

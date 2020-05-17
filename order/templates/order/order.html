@@ -1,0 +1,99 @@
+<!-- --------------------- FILE LOADED IN MODAL ------------------------ -->
+{% load tags %}
+{% load static %}
+ 
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<link rel="stylesheet" href="{% static 'css/order.css' %}" />
+<script type="text/javascript" src="{% static 'js/order.js' %}"></script> 
+ 
+<div class="cart">
+         
+    {% if not error %}
+        <div class="order_content">    
+            <h3> Twoje zamówienie: </h3>
+
+            <div class="cart_product_info">
+                <i>Nazwa</i>
+                <i>Porcja</i>
+                <i>Ilość</i>
+                <i>Cena</i>
+            </div>
+
+            {% for item in cart %}
+                <div class="order_product">
+                    <div class="cart_description">
+                        <i> {{ item.name }}</i>
+                        <i> {{ item.size}}</i>
+                        <i> {{ item.quantity }}</i>
+                        <i> {{ item.total_price }} zł</i>
+                    </div>
+
+                    {% get_sauces filled_form item.product_id as sauces %}
+                    {% get_chips filled_form item.product_id as chips %}
+                    {% get_meats filled_form item.product_id as meats %}
+
+                    <div class="order_additives">   
+                        {% if sauces %}
+                            <div class="order_sauce">                        
+                                <i>Sosy: </i>
+                                <span class="order_list_additives">
+                                    {% for key, value in sauces.items %}
+                                        <span>
+                                        <i>{{ key }}</i> 
+                                        
+                                        {% if value > 1 %}
+                                            <i>   x {{value}}</i>
+                                        {% endif %}
+                                        </span>
+                                    {% endfor %}
+                                </span>
+                            </div>
+                        {% endif %}
+
+                        {% if meats %}
+                            <div class="order_sauce">
+                                <i>Mięso: </i>
+                                <span class="order_list_additives">    
+                                {% for meat in meats %}
+                                    <span>{{ meat }}</span> 
+                                {% endfor %}
+                                </span>
+                            </div>   
+                        {% endif %}
+
+                        {% if chips %}
+                            <div class="order_sauce">  
+                                <i>Składnik:</i>
+                                <span class="order_list_additives">    
+                                {% for chip in chips %}
+                                    <span>{{ chip }}</span>     
+                                {% endfor %}
+                                </span>
+                            </div>      
+                        {% endif %}
+                    </div>
+                </div>  
+                                  
+            {% endfor %}
+                <div class="order_total_price">
+                    <i>Do zapłaty</i>
+                    <i>{{ cart.get_total_price }} zł</i>
+                </div>
+        </div>  
+
+        <div class="order_form">
+            <form method="POST" class="post-form" action="{% url 'order:order' %}">  
+                {{ form.as_p }}  
+                {% csrf_token %} 
+                <div class="g-recaptcha" data-sitekey="6Le73vQUAAAAAO3zFDWpXMlebOuNeurY_y8fSUGV"></div>
+                <div class="modal-footer">
+                    <button type="submit" id="order_button" class="save btn btn-default">Zamów</button>  
+                </div>
+            </form>  
+        </div>
+
+    {% else %}
+        <h4>{{ error }}</h4>
+    {% endif %}
+    
+</div>

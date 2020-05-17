@@ -1,0 +1,11 @@
+h3 {
+    margin: 0px 0px 15px 0px;
+}
+
+.modal-footer{
+    padding-bottom: 0px;
+}
+
+.close{
+    display: none;
+}

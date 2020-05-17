@@ -1,0 +1,7 @@
+.inline-related > h3  {
+    background: rgba(121, 174, 200,0.4); 
+    margin-top: 30px;
+}
+.module h2, .module caption, .inline-group h2 {
+    margin-top: 20px;
+}
