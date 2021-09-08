@@ -55,7 +55,7 @@ odfpy==1.4.1
 openpyxl==3.0.3
 pendulum==2.1.0
 phonenumbers==8.12.3
-Pillow==7.1.2
+Pillow==8.3.2
 purl==1.5
 py-moneyed==0.8.0
 pycairo==1.16.2
