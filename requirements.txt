@@ -3,7 +3,7 @@ anyjson==0.3.3
 asgiref==3.2.3
 asn1crypto==0.24.0
 astroid==2.3.3
-Babel==2.8.0
+Babel==2.9.1
 billiard==3.6.3.0
 braintree==4.1.0
 celery==4.4.2
