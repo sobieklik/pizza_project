@@ -61,7 +61,7 @@ py-moneyed==0.8.0
 pycairo==1.16.2
 pycparser==2.20
 PyGObject==3.30.4
-PyJWT==1.7.1
+PyJWT==2.4.0
 pylint==2.4.4
 pylint-django==2.0.13
 pylint-plugin-utils==0.6
